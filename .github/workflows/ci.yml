@@ -165,13 +165,13 @@ jobs:
         run: ${{ matrix.postinstall }}
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0  # Fetch full Git history for accurate commit information
 
       - name: SDK cache
         if: ${{ matrix.sdk }}
-        uses: actions/cache@v4
+        uses: actions/cache@v4.2.2
         env:
           cache-name: sdk
         with:
@@ -191,7 +191,7 @@ jobs:
           tar -C depends/SDKs -xf depends/sdk-sources/${{ env.sdk-filename }}
 
       - name: Dependency cache
-        uses: actions/cache@v4
+        uses: actions/cache@v4.2.2
         env:
           cache-name: depends
         with:
@@ -203,7 +203,7 @@ jobs:
           make $MAKEJOBS -C depends HOST=${{ matrix.host }} ${{ matrix.dep-opts }}
 
       - name: CCache
-        uses: actions/cache@v4
+        uses: actions/cache@v4.2.2
         env:
           cache-name: ccache
         with:
@@ -243,7 +243,7 @@ jobs:
           rm -rf qa/cache || true
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.1
         with:
           name: shibacoin-${{ github.sha }}-${{ matrix.name }}
           path: |
