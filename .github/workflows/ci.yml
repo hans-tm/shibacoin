@@ -269,13 +269,9 @@ jobs:
         run: |
           python3 -m pip install setuptools --break-system-packages
 
-      - name: Install system packages for DMG
-        run: |
-          brew install libpng
-
       - name: Build depends
         run: |
-          make -j3 -C depends HOST=aarch64-apple-darwin
+          make -j3 -C depends HOST=aarch64-apple-darwin boost=1_82_0
 
       - name: Generate build system and configure
         run: |
