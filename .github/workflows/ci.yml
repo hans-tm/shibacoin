@@ -263,18 +263,21 @@ jobs:
 
       - name: Install Homebrew packages
         run: |
-          brew install automake libtool pkg-config python3
+          brew install automake libtool pkg-config python3 ccache
 
       - name: Build depends
         run: |
-          make -j3 HOST=aarch64-apple-darwin
+          make -j3 -C depends HOST=aarch64-apple-darwin
+
+      - name: Generate build system and configure
+        run: |
+          ./autogen.sh
+          ./configure --prefix=$(pwd)/depends/aarch64-apple-darwin --disable-tests --disable-bench
 
       - name: Build Shibacoin
         env:
           MAKEJOBS: -j3
         run: |
-          ./autogen.sh
-          ./configure --prefix=$(pwd)/depends/aarch64-apple-darwin --disable-tests --disable-bench
           make $MAKEJOBS
 
       - name: Build DMG
