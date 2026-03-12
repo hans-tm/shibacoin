@@ -263,7 +263,7 @@ jobs:
 
       - name: Install Homebrew packages
         run: |
-          brew install automake libtool pkg-config python3 ccache cmake imagemagick librsvg libtiff xorriso
+          brew install automake libtool pkg-config python3 ccache cmake imagemagick librsvg libtiff xorriso openssl
 
       - name: Install Python packages for depends
         run: |

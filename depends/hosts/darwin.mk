@@ -5,15 +5,18 @@ LD64_VERSION=253.9
 
 ifeq ($(host),aarch64-apple-darwin)
 OSX_MIN_VERSION=11.0
-OSX_SDK_VERSION=$(shell ls -d /Applications/Xcode*.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX*.sdk 2>/dev/null | head -1 | sed 's/.*MacOSX\(.*\)\.sdk/\1/')
-OSX_SDK=$(shell ls -d /Applications/Xcode*.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX*.sdk 2>/dev/null | head -1)
-endif
-
+OSX_SDK_VERSION=14.0
+OSX_SDK=/Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+darwin_native_toolchain=
+darwin_CC=/Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK)
+darwin_CXX=/Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -stdlib=libc++
+else
 clang_prog=$(build_prefix)/bin/clang
 clangxx_prog=$(clang_prog)++
 
 darwin_CC=$(build_prefix)/bin/clang -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION)
 darwin_CXX=$(clang_prog)++ -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION) -stdlib=libc++
+endif
 
 darwin_CFLAGS=-pipe
 darwin_CXXFLAGS=$(darwin_CFLAGS)
