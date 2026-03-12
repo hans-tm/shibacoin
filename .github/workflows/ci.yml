@@ -269,6 +269,10 @@ jobs:
         run: |
           python3 -m pip install setuptools --break-system-packages
 
+      - name: Clear stale openssl build
+        run: |
+          rm -rf depends/work/build/aarch64-apple-darwin/openssl || true
+
       - name: Build depends
         run: |
           make -j3 -C depends HOST=aarch64-apple-darwin
