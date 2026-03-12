@@ -3,6 +3,12 @@ OSX_SDK_VERSION=10.11
 OSX_SDK=$(SDK_PATH)/MacOSX$(OSX_SDK_VERSION).sdk
 LD64_VERSION=253.9
 
+ifeq ($(host),aarch64-apple-darwin)
+OSX_MIN_VERSION=11.0
+OSX_SDK_VERSION=$(shell ls -d /Applications/Xcode*.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX*.sdk 2>/dev/null | head -1 | sed 's/.*MacOSX\(.*\)\.sdk/\1/')
+OSX_SDK=$(shell ls -d /Applications/Xcode*.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX*.sdk 2>/dev/null | head -1)
+endif
+
 clang_prog=$(build_prefix)/bin/clang
 clangxx_prog=$(clang_prog)++
 
