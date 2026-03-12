@@ -271,7 +271,7 @@ jobs:
 
       - name: Build depends
         run: |
-          make -j3 -C depends HOST=aarch64-apple-darwin boost=1_82_0
+          make -j3 -C depends HOST=aarch64-apple-darwin
 
       - name: Generate build system and configure
         run: |

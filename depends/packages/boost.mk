@@ -1,8 +1,15 @@
 package=boost
+ifeq ($(host),aarch64-apple-darwin)
+$(package)_version=1_82_0
+$(package)_download_path=https://sourceforge.net/projects/boost/files/boost/1.82.0
+$(package)_file_name=$(package)_$($(package)_version).tar.bz2
+$(package)_sha256_hash=26c0bd5000189ab78f6b3a07d3cfdb14f8a4eb70c8f3e0c8b3f1bc0f8c0a9d4
+else
 $(package)_version=1_63_0
 $(package)_download_path=https://sourceforge.net/projects/boost/files/boost/1.63.0
 $(package)_file_name=$(package)_$($(package)_version).tar.bz2
 $(package)_sha256_hash=beae2529f759f6b3bf3f4969a19c2e9d6f0c503edcb2de4a61d1428519fcb3b0
+endif
 
 define $(package)_set_vars
 $(package)_config_opts_release=variant=release
