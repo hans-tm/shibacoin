@@ -647,7 +647,7 @@ bool CWallet::EncryptWallet(const SecureString& strWalletPassphrase)
             }
             // We now probably have half of our keys encrypted in memory, and half not...
             // die and let the user reload the unencrypted wallet.
-            assert(false);
+            throw std::runtime_error("Failed to encrypt keys - wallet may be corrupted. Please reload the unencrypted wallet.");
         }
 
         // Encryption was introduced in version 0.4.0
@@ -659,7 +659,7 @@ bool CWallet::EncryptWallet(const SecureString& strWalletPassphrase)
                 delete pwalletdbEncryption;
                 // We now have keys encrypted in memory, but not on disk...
                 // die to avoid confusion and let the user reload the unencrypted wallet.
-                assert(false);
+                throw std::runtime_error("Failed to commit encrypted wallet to database - wallet may be corrupted. Please reload the unencrypted wallet.");
             }
 
             delete pwalletdbEncryption;

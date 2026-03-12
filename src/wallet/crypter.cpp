@@ -195,7 +195,7 @@ bool CCryptoKeyStore::Unlock(const CKeyingMaterial& vMasterKeyIn)
         if (keyPass && keyFail)
         {
             LogPrintf("The wallet is probably corrupted: Some keys decrypt but not all.\n");
-            assert(false);
+            throw std::runtime_error("Wallet decryption failed - some keys decrypt but not all. The wallet is probably corrupted.");
         }
         if (keyFail || !keyPass)
             return false;
