@@ -263,7 +263,15 @@ jobs:
 
       - name: Install Homebrew packages
         run: |
-          brew install automake libtool pkg-config python3 ccache
+          brew install automake libtool pkg-config python3 ccache cmake imagemagick librsvg@3 libtiff xorriso
+
+      - name: Install Python packages for depends
+        run: |
+          python3 -m pip install --upgrade pip setuptools
+
+      - name: Install system packages for DMG
+        run: |
+          brew install libpng
 
       - name: Build depends
         run: |
