@@ -1,9 +1,9 @@
 package=openssl
 ifeq ($(host),aarch64-apple-darwin)
 $(package)_version=1.1.1w
-$(package)_download_path=https://www.openssl.org/source
+$(package)_download_path=https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_1w
 $(package)_file_name=$(package)-$($(package)_version).tar.gz
-$(package)_sha256_hash=29d3c8d8c2ce288e00c747ee5a3fb9a8a1e2eb2b4b1a4f8e8d9c7b6a5e4d3c2b
+$(package)_sha256_hash=5931b966023df6d3d0e5a33a19a55d62d00b5e15786f779c5a095bd4c0e6e5b3e
 else
 $(package)_version=1.0.2
 $(package)_version_suffix=u
