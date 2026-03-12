@@ -36,7 +36,6 @@ jobs:
           - i686-win
           - x86_64-linux
           - x86_64-macos
-          - arm64-macos
           - x86_64-win
         include:
           - name: i686-linux
@@ -127,19 +126,6 @@ jobs:
             goal: deploy
             sdk: 10.11
             sdk-shasum: "bec9d089ebf2e2dd59b1a811a38ec78ebd5da18cbbcd6ab39d1e59f64ac5033f"
-          - name: arm64-macos
-            host: aarch64-apple-darwin
-            container: ubuntu:20.04
-            packages: cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools libtinfo5 xorriso
-            run-bench: false
-            check-security: true
-            check-symbols: false
-            dep-opts: ""
-            config-opts: "--with-gui=qt5 --disable-tests"
-            goal: deploy
-            sdk: 11.0
-            sdk-shasum: "9af1b0d5c7992a4e8f3a4e0e0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0"
-
     runs-on: ubuntu-22.04
     container:
       image: ${{ matrix.container }}
@@ -267,3 +253,39 @@ jobs:
             dist/Shibacoin-Qt.app
             Shibacoin-Core.dmg
             ${{ matrix.name }}-bench.csv
+
+  arm64-macos-native:
+    name: arm64-macos-native
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Install Homebrew packages
+        run: |
+          brew install automake libtool pkg-config python3
+
+      - name: Build depends
+        run: |
+          make -j3 HOST=aarch64-apple-darwin
+
+      - name: Build Shibacoin
+        env:
+          MAKEJOBS: -j3
+        run: |
+          ./autogen.sh
+          ./configure --prefix=$(pwd)/depends/aarch64-apple-darwin --disable-tests --disable-bench
+          make $MAKEJOBS
+
+      - name: Build DMG
+        run: |
+          make -j3 deploy
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4.6.1
+        with:
+          name: shibacoin-${{ github.sha }}-arm64-macos
+          path: |
+            depends/aarch64-apple-darwin/bin/shibacoind
+            depends/aarch64-apple-darwin/bin/shibacoin-cli
+            Shibacoin-Core.dmg
