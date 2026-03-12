@@ -8,8 +8,8 @@ OSX_MIN_VERSION=11.0
 OSX_SDK_VERSION=14.0
 OSX_SDK=/Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
 darwin_native_toolchain=
-darwin_CC=/Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK)
-darwin_CXX=/Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -stdlib=libc++
+darwin_CC=/Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -isysroot $(OSX_SDK) -I$(OSX_SDK)/usr/include
+darwin_CXX=/Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -isysroot $(OSX_SDK) -I$(OSX_SDK)/usr/include -stdlib=libc++
 else
 clang_prog=$(build_prefix)/bin/clang
 clangxx_prog=$(clang_prog)++
