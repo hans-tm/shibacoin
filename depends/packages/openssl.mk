@@ -4,6 +4,7 @@ $(package)_version=1.1.1w
 $(package)_download_path=https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_1w
 $(package)_file_name=$(package)-$($(package)_version).tar.gz
 $(package)_sha256_hash=cf3098950cb4d853ad95c0841f1f9c6d3dc102dccfcacd521d93925208b76ac8
+$(package)_patches=
 else
 $(package)_version=1.0.2
 $(package)_version_suffix=u
