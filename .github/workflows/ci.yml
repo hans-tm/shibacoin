@@ -267,7 +267,7 @@ jobs:
 
       - name: Install Python packages for depends
         run: |
-          python3 -m pip install --upgrade pip setuptools
+          python3 -m pip install --upgrade pip setuptools --break-system-packages
 
       - name: Install system packages for DMG
         run: |
