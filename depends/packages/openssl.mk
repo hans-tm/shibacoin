@@ -3,7 +3,7 @@ ifeq ($(host),aarch64-apple-darwin)
 $(package)_version=1.1.1w
 $(package)_download_path=https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_1w
 $(package)_file_name=$(package)-$($(package)_version).tar.gz
-$(package)_sha256_hash=5931b966023df6d3d0e5a33a19a55d62d00b5e15786f779c5a095bd4c0e6e5b3e
+$(package)_sha256_hash=cf3098950cb4d853ad95c0841f1f9c6d3dc102dccfcacd521d93925208b76ac8
 else
 $(package)_version=1.0.2
 $(package)_version_suffix=u
