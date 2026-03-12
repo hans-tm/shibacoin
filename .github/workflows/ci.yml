@@ -36,6 +36,7 @@ jobs:
           - i686-win
           - x86_64-linux
           - x86_64-macos
+          - arm64-macos
           - x86_64-win
         include:
           - name: i686-linux
@@ -126,6 +127,18 @@ jobs:
             goal: deploy
             sdk: 10.11
             sdk-shasum: "bec9d089ebf2e2dd59b1a811a38ec78ebd5da18cbbcd6ab39d1e59f64ac5033f"
+          - name: arm64-macos
+            host: aarch64-apple-darwin
+            container: ubuntu:20.04
+            packages: cmake imagemagick libcap-dev librsvg2-bin libz-dev libbz2-dev libtiff-tools libtinfo5 xorriso
+            run-bench: false
+            check-security: true
+            check-symbols: false
+            dep-opts: ""
+            config-opts: "--with-gui=qt5 --disable-tests"
+            goal: deploy
+            sdk: 11.0
+            sdk-shasum: "9af1b0d5c7992a4e8f3a4e0e0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0"
 
     runs-on: ubuntu-22.04
     container:
