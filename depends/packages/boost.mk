@@ -3,7 +3,7 @@ ifeq ($(host),aarch64-apple-darwin)
 $(package)_version=1_82_0
 $(package)_download_path=https://sourceforge.net/projects/boost/files/boost/1.82.0
 $(package)_file_name=$(package)_$($(package)_version).tar.bz2
-$(package)_sha256_hash=26c0bd5000189ab78f6b3a07d3cfdb14f8a4eb70c8f3e0c8b3f1bc0f8c0a9d4
+$(package)_sha256_hash=a6e1ab9b0860e6a2881dd7b21fe9f737a095e5f33a3a874afc6a345228597ee6
 else
 $(package)_version=1_63_0
 $(package)_download_path=https://sourceforge.net/projects/boost/files/boost/1.63.0
